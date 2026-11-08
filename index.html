@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NID Guide BD — Bangladesh National ID Guide</title>
+<meta name="description" content="Bangladesh NID guide: reported fees, step-by-step registration / correction / re-issue guides, document checklists, eligibility checker and quiz. Bilingual English / বাংলা, fully offline.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <div>
+      <h1 id="title" data-i18n="appTitle">NID Guide BD</h1>
+      <p class="tagline" data-i18n="tagline">Bangladesh National ID made simple — fees, steps, documents, eligibility and a quiz. Fully offline.</p>
+    </div>
+    <button id="langBtn" type="button" class="btn lang">বাংলা</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="facts-card" aria-label="Key facts">
+    <h2 data-i18n="factsTitle">Key facts</h2>
+    <div id="facts" class="facts"></div>
+  </section>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button id="tabbtn-fees" type="button" role="tab" class="tab active" data-i18n="tabFees">Fees</button>
+    <button id="tabbtn-guides" type="button" role="tab" class="tab" data-i18n="tabGuides">Guides</button>
+    <button id="tabbtn-checklists" type="button" role="tab" class="tab" data-i18n="tabChecklists">Documents</button>
+    <button id="tabbtn-eligibility" type="button" role="tab" class="tab" data-i18n="tabEligibility">Eligibility</button>
+    <button id="tabbtn-quiz" type="button" role="tab" class="tab" data-i18n="tabQuiz">Quiz</button>
+    <button id="tabbtn-data" type="button" role="tab" class="tab" data-i18n="tabData">My data</button>
+  </nav>
+
+  <!-- FEES -->
+  <section id="tab-fees" class="panel" aria-label="Fees">
+    <div id="feeCalc" class="card">
+      <h2 data-i18n="feeCalcTitle">Fee calculator</h2>
+      <div class="form-grid">
+        <label><span data-i18n="feeService">Service</span>
+          <select id="feeService"></select>
+        </label>
+        <label id="timesRow"><span data-i18n="feeTimes">How many times before?</span>
+          <select id="feeTimes"></select>
+        </label>
+        <label id="urgentRow"><span data-i18n="feeUrgent">Delivery</span>
+          <select id="feeUrgent"></select>
+        </label>
+      </div>
+      <p class="fee-result"><span data-i18n="feeResult">Fee to pay</span>: <strong id="feeResult">—</strong></p>
+      <p class="muted" data-i18n="feeNote">Fees are reported figures from the Election Commission schedule. The amount shown on services.nidw.gov.bd at the time you apply is final — always check there before paying.</p>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="feeChartTitle">Official fee chart (reported)</h2>
+      <p class="muted" data-i18n="feeChartHint">Tap a row to load it into the calculator.</p>
+      <table class="fee-table">
+        <thead><tr><th data-i18n="feeChartService">Service</th><th data-i18n="feeChartFee">Fee</th></tr></thead>
+        <tbody id="feeChartBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- GUIDES -->
+  <section id="tab-guides" class="panel" aria-label="Guides" hidden>
+    <h2 data-i18n="guidesTitle">Step-by-step guides</h2>
+    <p class="muted" data-i18n="guidesHint">Tick each step as you finish it — your progress is saved in this browser.</p>
+    <div id="guidesList"></div>
+  </section>
+
+  <!-- CHECKLISTS -->
+  <section id="tab-checklists" class="panel" aria-label="Documents" hidden>
+    <h2 data-i18n="checkTitle">Document checklists</h2>
+    <p class="muted" data-i18n="checkHint">Tick what you already have. The lists are saved in this browser.</p>
+    <div class="card">
+      <p><strong id="checkOverall"></strong></p>
+      <div class="progress"><div class="bar" id="checkOverallBar" style="width:0%"></div></div>
+    </div>
+    <div id="checkList"></div>
+  </section>
+
+  <!-- ELIGIBILITY -->
+  <section id="tab-eligibility" class="panel" aria-label="Eligibility" hidden>
+    <div class="card">
+      <h2 data-i18n="eligTitle">Can I register for a new NID?</h2>
+      <div class="form-grid">
+        <label><span data-i18n="eligDob">Date of birth</span>
+          <input id="eligDob" type="date" max="2026-11-08">
+        </label>
+      </div>
+      <label class="check-line"><input id="eligCitizen" type="checkbox"> <span data-i18n="eligCitizen">I am a Bangladeshi citizen</span></label>
+      <label class="check-line"><input id="eligBirthCert" type="checkbox"> <span data-i18n="eligBirthCert">I have a birth certificate</span></label>
+      <label class="check-line"><input id="eligSsc" type="checkbox"> <span data-i18n="eligSsc">I have an SSC / JSC / HSC certificate or admit card</span></label>
+      <p><button id="eligBtn" type="button" class="btn primary" data-i18n="eligCheck">Check eligibility</button></p>
+      <div id="eligResult" class="result" hidden></div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="tab-quiz" class="panel" aria-label="Quiz" hidden>
+    <div class="card">
+      <h2 data-i18n="quizTitle">NID quiz</h2>
+      <div id="quizBox"></div>
+    </div>
+  </section>
+
+  <!-- DATA -->
+  <section id="tab-data" class="panel" aria-label="My data" hidden>
+    <div class="card">
+      <h2 data-i18n="dataTitle">My data</h2>
+      <p class="muted" data-i18n="dataHint">Your guide progress, document checklists and best quiz score live only in this browser. Export them to keep a backup.</p>
+      <div class="btn-row">
+        <button id="exportBtn" type="button" class="btn" data-i18n="exportBtn">Export my data</button>
+        <button id="importBtn" type="button" class="btn" data-i18n="importBtn">Import data</button>
+        <button id="eraseBtn" type="button" class="btn danger" data-i18n="eraseBtn">Erase all</button>
+        <input id="importFile" type="file" accept="application/json,.json" hidden>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p data-i18n="disclaimer">Unofficial learning guide, not a government publication. Fees and steps are reported figures — verify on services.nidw.gov.bd before you apply or pay. Never pay a broker; all official payments happen inside the portal.</p>
+  </footer>
+</main>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="js/logic.js"></script>
+<script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
